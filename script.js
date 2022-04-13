@@ -11,7 +11,7 @@ var Navbar = function Navbar() {
     return React.createElement(
         "nav",
         { className: "navbar navbar-expand-lg navbar-light bg-light" },
-        "Navbar"
+        "USELESS NAVBAR"
     );
 };
 
@@ -37,7 +37,7 @@ var Footer = function Footer() {
     );
 };
 
-// TEMPLATE 
+// TEMPLATE
 var Template = function Template(props) {
     return React.createElement(
         "div",
@@ -61,76 +61,68 @@ var Template = function Template(props) {
     );
 };
 
-// Prevent event defaults
-
+// Prevent default when clicking a link
 var Link = function Link() {
-    var preventTheUsual = function preventTheUsual(e) {
-
+    var noPopUp = function noPopUp(e) {
         e.preventDefault();
-        console.log('link clicked');
+        alert('Sorry you cannot open Google');
     };
+
     return React.createElement(
         "a",
-        { href: "https://www.google.com/", target: "_blank", rel: "noopener noreferrer", onClick: preventTheUsual },
-        "Google"
+        { href: "https://www.google.com/", target: "_blank", onClick: noPopUp },
+        "google.com"
     );
 };
 
-// App
-var App = function App() {
-    return React.createElement(
-        React.Fragment,
-        null,
-        React.createElement(
-            Template,
-            null,
-            React.createElement(Counter, null),
-            React.createElement("br", null),
-            React.createElement("br", null),
-            React.createElement(
-                "p",
-                null,
-                "Try to click the link below you cannot open it because I use preventDefault(), you can open it using right click through open new tab or window."
-            ),
-            React.createElement(Link, null)
-        )
-    );
-};
+// Counter Class Component
 
 var Counter = function (_React$Component) {
     _inherits(Counter, _React$Component);
 
-    function Counter(props) {
+    function Counter() {
         _classCallCheck(this, Counter);
 
-        var _this = _possibleConstructorReturn(this, (Counter.__proto__ || Object.getPrototypeOf(Counter)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (Counter.__proto__ || Object.getPrototypeOf(Counter)).call(this));
 
         _this.state = {
             count: 0
         };
 
-        _this.addCount = _this.addCount.bind(_this);
-        _this.minusCount = _this.minusCount.bind(_this);
+        _this.addOne = _this.addOne.bind(_this);
+        _this.minusOne = _this.minusOne.bind(_this);
+        _this.changeCountWithAmount = _this.changeCountWithAmount.bind(_this);
+
         return _this;
     }
 
     _createClass(Counter, [{
-        key: "handleClick",
-        value: function handleClick() {
-            return console.log('this is: ', this);
-        }
-    }, {
-        key: "addCount",
-        value: function addCount() {
-            return this.setState({
+        key: "addOne",
+        value: function addOne() {
+            this.setState({
                 count: this.state.count + 1
             });
         }
     }, {
-        key: "minusCount",
-        value: function minusCount() {
-            return this.setState({
+        key: "minusOne",
+        value: function minusOne() {
+            this.setState({
                 count: this.state.count - 1
+            });
+        }
+    }, {
+        key: "handleClick",
+        value: function handleClick() {
+            console.log('this is', this);
+            this.setState({
+                count: this.state.count + 2
+            });
+        }
+    }, {
+        key: "changeCountWithAmount",
+        value: function changeCountWithAmount(amount) {
+            this.setState({
+                count: this.state.count + amount
             });
         }
     }, {
@@ -149,13 +141,14 @@ var Counter = function (_React$Component) {
                 ),
                 React.createElement(
                     "button",
-                    { className: "btn btn-primary", onClick: this.addCount },
-                    "+1"
+                    { className: "btn btn-primary", onClick: this.addOne },
+                    " + 1"
                 ),
+                ' ',
                 React.createElement(
                     "button",
-                    { className: "btn btn-danger", onClick: this.minusCount },
-                    "-1"
+                    { className: "btn btn-warning", onClick: this.minusOne },
+                    " - 1"
                 ),
                 React.createElement("br", null),
                 React.createElement("br", null),
@@ -163,14 +156,97 @@ var Counter = function (_React$Component) {
                 React.createElement(
                     "p",
                     null,
-                    "Check the console.log"
+                    "The below buttons uses arrow functions syntax and pass the amount of count as an argument, unlike the above buttons that has their own methods and binding."
+                ),
+                React.createElement(
+                    "p",
+                    null,
+                    "Buttons below only uses one method which is only the addOneWithAmount()."
                 ),
                 React.createElement(
                     "button",
-                    { className: "btn btn-warning", onClick: function onClick(e) {
+                    { className: "btn btn-danger", onClick: function onClick() {
+                            return _this2.changeCountWithAmount(1);
+                        } },
+                    " PLUS 1"
+                ),
+                ' ',
+                React.createElement(
+                    "button",
+                    { className: "btn btn-danger", onClick: function onClick() {
+                            return _this2.changeCountWithAmount(2);
+                        } },
+                    " PLUS 2"
+                ),
+                ' ',
+                React.createElement(
+                    "button",
+                    { className: "btn btn-danger", onClick: function onClick() {
+                            return _this2.changeCountWithAmount(3);
+                        } },
+                    " PLUS 3"
+                ),
+                ' ',
+                React.createElement(
+                    "button",
+                    { className: "btn btn-danger", onClick: function onClick() {
+                            return _this2.changeCountWithAmount(4);
+                        } },
+                    " PLUS 4"
+                ),
+                React.createElement("br", null),
+                React.createElement("br", null),
+                React.createElement("br", null),
+                React.createElement(
+                    "button",
+                    { className: "btn btn-danger", onClick: function onClick() {
+                            return _this2.changeCountWithAmount(-1);
+                        } },
+                    " Minus 1"
+                ),
+                ' ',
+                React.createElement(
+                    "button",
+                    { className: "btn btn-danger", onClick: function onClick() {
+                            return _this2.changeCountWithAmount(-2);
+                        } },
+                    " Minus 2"
+                ),
+                ' ',
+                React.createElement(
+                    "button",
+                    { className: "btn btn-danger", onClick: function onClick() {
+                            return _this2.changeCountWithAmount(-3);
+                        } },
+                    " Minus 3"
+                ),
+                ' ',
+                React.createElement(
+                    "button",
+                    { className: "btn btn-danger", onClick: function onClick() {
+                            return _this2.changeCountWithAmount(-4);
+                        } },
+                    " Minus 4"
+                ),
+                React.createElement("br", null),
+                React.createElement("br", null),
+                React.createElement("br", null),
+                React.createElement(
+                    "p",
+                    null,
+                    "Check the console when you click the button below"
+                ),
+                React.createElement(
+                    "button",
+                    { onClick: function onClick(e) {
                             return _this2.handleClick(e);
                         } },
-                    "Try Click ME"
+                    "Click me to add 2"
+                ),
+                React.createElement(
+                    "p",
+                    null,
+                    "It is the other way for us not anymore bind the this when we call a function but it is not recommended, binding still the much better choice."
                 )
             );
         }
@@ -178,5 +254,77 @@ var Counter = function (_React$Component) {
 
     return Counter;
 }(React.Component);
+
+// ScrollLogger
+
+
+var ScrollLogger = function (_React$Component2) {
+    _inherits(ScrollLogger, _React$Component2);
+
+    function ScrollLogger() {
+        _classCallCheck(this, ScrollLogger);
+
+        var _this3 = _possibleConstructorReturn(this, (ScrollLogger.__proto__ || Object.getPrototypeOf(ScrollLogger)).call(this));
+
+        _this3.state = {
+            scrollY: 0
+        };
+
+        _this3.updateYpx = _this3.updateYpx.bind(_this3);
+        return _this3;
+    }
+
+    _createClass(ScrollLogger, [{
+        key: "updateYpx",
+        value: function updateYpx() {
+            this.setState({ scrollY: Math.round(window.scrollY) });
+        }
+    }, {
+        key: "componentDidMount",
+        value: function componentDidMount() {
+            window.addEventListener('scroll', this.updateYpx);
+        }
+    }, {
+        key: "componentWillUnmount",
+        value: function componentWillUnmount() {
+            window.removeEventListener('scroll', this.updateYpx);
+        }
+    }, {
+        key: "render",
+        value: function render() {
+            return React.createElement(
+                "div",
+                { className: "position-fixed bg-white p-3", style: { right: 0, top: 0 } },
+                "Scrolled: ",
+                this.state.scrollY,
+                "px"
+            );
+        }
+    }]);
+
+    return ScrollLogger;
+}(React.Component);
+
+// App
+
+
+var App = function App() {
+    return React.createElement(
+        React.Fragment,
+        null,
+        React.createElement(
+            Template,
+            null,
+            React.createElement(Counter, null),
+            React.createElement(Link, null),
+            React.createElement(
+                "p",
+                null,
+                "you cannot open the link above by clicking it, you should rather use right click and open it through new tab or new window"
+            ),
+            React.createElement(ScrollLogger, null)
+        )
+    );
+};
 
 ReactDOM.render(React.createElement(App, null), document.getElementById('root'));
